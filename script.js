@@ -1,14 +1,16 @@
 let header = document.getElementById("header");
 let footer = document.getElementById("footer");
-let mainBox = document.getElementById("mainBox")
+let mainBox = document.getElementById("mainBox");
 
 let userID = document.getElementById("usernameBox");
 let userPassword = document.getElementById("passwordBox");
 let placeholderBtn = document.getElementById("placeholderBtn");
 
 let userData = [
-    {userName: "janne", password: "test"}
-];
+    {userName: "janne", password: "test"},
+    {userName: "tusse", password: "tass"},
+    {userName: "konrad", password: "kola"},
+    ];
 
 if (localStorage.getItem("userName")) {
     loggedIn();
@@ -17,33 +19,53 @@ if (localStorage.getItem("userName")) {
     createLoginBtn();
 } 
 
-function checkPassword() {     
-    console.log('klick på knapp');      
-    for (i = 0; i < userData.length; i++) {
-        if (userID.value == userData[i].userName && userPassword.value == userData[i].password) {
-            loggedIn();            
+function checkPassword() {  
+//     let tempName = userID.value;
+//     let tempPass = userPassword.value;
 
+//     let findName = userData.map((temp, index) => {
+//         if (tempName === userData.userName) {
+//             console.log(index);            
+
+//         } else {
+//             console.log("neeeej");
+//         }
+
+//     })
+
+    // console.log(tempName);
+    // let theName = userData.find(person => person.userName === "tempName");
+    // console.log(tempName);
+    //     //  if (userData.userName === userID.value && userData.password === userPassword.value) {
+    // console.log(theName);
+
+
+    for (i = 0; i < userData.length; i++) {
+        if (userID.value === userData[i].userName && userPassword.value === userData[i].password) {
             let loginUser = userID.value
             localStorage.setItem("userName", loginUser);
-            toggleBtn();        
-
-            userID.value="";
-            userPassword.value="";
+            toggleBtn();
+            loggedIn();
+            break;                   
              
         } else {
             alert("Wrong username or password");
-            userID.value="";
-            userPassword.value="";
+            
         }
+        
     }
+    userID.value="";
+    userPassword.value="";
 }
 
 function toggleBtn () {
-    placeholderBtn.innerHTML = "";
+    placeholderBtn.innerHTML = "";    
 
     let logoutBtn = document.createElement("button");
     placeholderBtn.appendChild(logoutBtn);
     logoutBtn.innerText = "logout";
+    userID.style.display = "none";
+    userPassword.style.display ="none";
 
     logoutBtn.addEventListener("click", () => {
         alert("Du har loggats ut");
@@ -54,6 +76,9 @@ function toggleBtn () {
 
 function createLoginBtn () {
     placeholderBtn.innerHTML ="";
+
+    userID.style.display = "";
+    userPassword.style.display = "";
 
     let loginBtn = document.createElement("button");
     placeholderBtn.appendChild(loginBtn);
@@ -66,9 +91,9 @@ function createLoginBtn () {
 
 function loggedIn() {    
     alert("inloggad");
-    mainBox.style.visibility ="initial";
+    
 }
 
 function loggedout() {
-    mainBox.style.visibility = "hidden";
+
 }
