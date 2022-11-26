@@ -50,15 +50,12 @@ function toggleBtn () {
     logoutBtn.addEventListener("click", () => { 
         mainBox.innerHTML= "";
         localStorage.removeItem("userName");
-        createLoginBtn();
-        
-    })     
-    
+        createLoginBtn();        
+    })         
 }
 
 function createLoginBtn () {    
     placeholderBtn.innerHTML ="";
-
     userID.style.display = "";
     userPassword.style.display = "";
 
@@ -81,6 +78,7 @@ function loggedIn() {
 function loggedout() {
     mainBox.innerHTML= "";
 }
+
 function alreadyLogIn() {
     let loggedInUser = JSON.parse(localStorage.getItem("userName"));
     let welcomeBox = document.createElement("span");
